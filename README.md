@@ -82,7 +82,7 @@ $ npm install
 Para iniciarlo necesitaras tener instalado Angular CLI (npm i -g @angular/cli):
 
 ```bash
-$ ng serve
+$ npm start
 ```
 
 Navega a `http://localhost:4200/` para probarlo.
