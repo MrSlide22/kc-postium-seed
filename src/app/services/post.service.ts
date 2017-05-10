@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { Http, Response, URLSearchParams, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
@@ -16,7 +16,7 @@ export class PostService {
     getPosts(): Observable<Post[]> {
 
         /*----------------------------------------------------------------------------------------------|
-         | ~~~ Pink Path ~~~                                                                            |
+         | ~~~ [Pink Path | HECHO] ~~~                                                                  |
          |----------------------------------------------------------------------------------------------|
          | Pide al servidor que te retorne los posts ordenados de más reciente a menos, teniendo en     |
          | cuenta su fecha de publicación. Filtra también aquellos que aún no están publicados, pues no |
@@ -30,9 +30,20 @@ export class PostService {
          |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
          |----------------------------------------------------------------------------------------------*/
 
+        const parametros: URLSearchParams = new URLSearchParams();
+        parametros.set('publicationDate_lte', String(new Date().getTime()));
+        parametros.set('_sort', 'publicationDate');
+        parametros.set('_order', 'DESC');
+
+        let opciones: RequestOptions = new RequestOptions();
+        opciones.search = parametros;
+
         return this._http
-                   .get(`${this._backendUri}/posts`)
-                   .map((response: Response) => Post.fromJsonToList(response.json()));
+            .get(`${this._backendUri}/posts`, opciones)
+            .map((response: Response): Post[] => {
+                console.log(response.json());
+                return Post.fromJsonToList(response.json())
+            });
     }
 
     getUserPosts(id: number): Observable<Post[]> {
@@ -55,8 +66,8 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts`)
-                   .map((response: Response) => Post.fromJsonToList(response.json()));
+            .get(`${this._backendUri}/posts`)
+            .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getCategoryPosts(id: number): Observable<Post[]> {
@@ -83,14 +94,14 @@ export class PostService {
          |--------------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts`)
-                   .map((response: Response) => Post.fromJsonToList(response.json()));
+            .get(`${this._backendUri}/posts`)
+            .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getPostDetails(id: number): Observable<Post> {
         return this._http
-                   .get(`${this._backendUri}/posts/${id}`)
-                   .map((response: Response) => Post.fromJson(response.json()));
+            .get(`${this._backendUri}/posts/${id}`)
+            .map((response: Response) => Post.fromJson(response.json()));
     }
 
     createPost(post: Post): Observable<Post> {
