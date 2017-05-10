@@ -40,10 +40,7 @@ export class PostService {
 
         return this._http
             .get(`${this._backendUri}/posts`, opciones)
-            .map((response: Response): Post[] => {
-                console.log(response.json());
-                return Post.fromJsonToList(response.json())
-            });
+            .map((response: Response): Post[] => Post.fromJsonToList(response.json()));
     }
 
     getUserPosts(id: number): Observable<Post[]> {
