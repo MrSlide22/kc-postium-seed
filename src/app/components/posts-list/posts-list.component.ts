@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { Router } from '@angular/router';
 
 import { Post } from "../../models/post";
+import { User } from '../../models/user';
 
 
 @Component({
@@ -15,12 +16,15 @@ export class PostsListComponent {
     constructor(private _router: Router) { }
 
     /*------------------------------------------------------------------------------------------------------------------|
-     | ~~~ Red Path ~~~                                                                                                 |
+     | ~~~ [Red Path | HECHO] ~~~                                                                                       |
      |------------------------------------------------------------------------------------------------------------------|
      | Maneja el evento del componente PostPreviewComponent que indica la selección del autor de un post y navega a la  |
      | dirección correspondiente. Recuerda que para hacer esto necesitas inyectar como dependencia el Router de la app. |
      | La ruta a navegar es '/posts/users', pasando como parámetro el identificador del autor.                          |
      |------------------------------------------------------------------------------------------------------------------*/
+     goToAuthor(user: User){
+         this._router.navigate(['/posts/users', user.id]);
+     }
 
     /*-----------------------------------------------------------------------------------------------------------------|
      | ~~~ [Green Path | HECHO] ~~~                                                                                    |
@@ -29,7 +33,7 @@ export class PostsListComponent {
      | correspondiente. Recuerda que para hacer esto necesitas inyectar como dependencia el Router de la app.  La ruta |
      | a navegar es '/posts', pasando como parámetro el identificador del post.                                        |
      |-----------------------------------------------------------------------------------------------------------------*/
-    goToPost(post) {
+    goToPost(post: Post) {
         this._router.navigate(['/posts', post.id]);
     }
 }

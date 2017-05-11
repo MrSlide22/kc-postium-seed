@@ -5,12 +5,12 @@
     <div class="author">
         <!--
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Red Path                                                        |
+        | [Red Path | HECHO]                                              |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Un clic sobre el autor debería navegar a su colección de posts. |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         -->
-        <span class="name blink-font">{{ post.author.name }}</span>
+        <span class="name blink-font" (click)="goToAuthor(post.author)">{{ post.author.name }}</span>
         <!--
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | [Blue Path | HECHO]                                                           |
@@ -29,11 +29,15 @@
     <div class="html-text" [innerHtml]="plainTextToHtml(post.body)"></div>
     <!--
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Yellow Path                                                              |
+    | [Yellow Path | HECHO]                                                    |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Suscribe el componente CategoryBoxComponent al evento que hayas definido |
     | en él para notificar los clics sobre las categorías del post.            |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     -->
-    <category-box [categories]="post.categories"></category-box>
+    <category-box [categories]="post.categories" (categoriaPulsada)="goToCategoria($event)"></category-box>
+
+    <div class="row">
+        <button type="button" class="button-primary u-pull-right" (click)="goToEditPost()">Editar historia</button>
+    </div>
 </div>

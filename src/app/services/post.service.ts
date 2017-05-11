@@ -46,7 +46,7 @@ export class PostService {
     getUserPosts(id: number): Observable<Post[]> {
 
         /*----------------------------------------------------------------------------------------------|
-         | ~~~ Red Path ~~~                                                                             |
+         | ~~~ [Red Path | HECHO] ~~~                                                                   |
          |----------------------------------------------------------------------------------------------|
          | Ahora mismo, esta función está obteniendo todos los posts existentes, y solo debería obtener |
          | aquellos correspondientes al autor indicado. Añade los parámetros de búsqueda oportunos para |
@@ -62,15 +62,24 @@ export class PostService {
          |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
          |----------------------------------------------------------------------------------------------*/
 
+        const parametros: URLSearchParams = new URLSearchParams();
+        parametros.set('author.id', String(id));
+        parametros.set('publicationDate_lte', String(new Date().getTime()));
+        parametros.set('_sort', 'publicationDate');
+        parametros.set('_order', 'DESC');
+
+        let opciones: RequestOptions = new RequestOptions();
+        opciones.search = parametros;
+
         return this._http
-            .get(`${this._backendUri}/posts`)
+            .get(`${this._backendUri}/posts`, opciones)
             .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getCategoryPosts(id: number): Observable<Post[]> {
 
         /*--------------------------------------------------------------------------------------------------|
-         | ~~~ Yellow Path ~~~                                                                              |
+         | ~~~ [Yellow Path | HECHO] ~~~                                                                    |
          |--------------------------------------------------------------------------------------------------|
          | Ahora mismo, esta función está obteniendo todos los posts existentes, y solo debería obtener     |
          | aquellos correspondientes a la categoría indicada. Añade los parámetros de búsqueda oportunos    |
@@ -90,9 +99,29 @@ export class PostService {
          |   - Ordenación: _sort=publicationDate&_order=DESC                                                |
          |--------------------------------------------------------------------------------------------------*/
 
+        const parametros: URLSearchParams = new URLSearchParams();
+        parametros.set('publicationDate_lte', String(new Date().getTime()));
+        parametros.set('_sort', 'publicationDate');
+        parametros.set('_order', 'DESC');
+
+        let opciones: RequestOptions = new RequestOptions();
+        opciones.search = parametros;
+
         return this._http
-            .get(`${this._backendUri}/posts`)
-            .map((response: Response) => Post.fromJsonToList(response.json()));
+            .get(`${this._backendUri}/posts`, opciones)
+            .map((response: Response): Post[] => {
+
+                // obtener lista de Post
+                const listaPosts = Post.fromJsonToList(response.json())
+
+                // filtrar la lista
+                const ret = listaPosts.filter((currentPost: Post) => {
+
+                    const categoriesIds = currentPost.categories.map(val => val.id);
+                    return categoriesIds.indexOf(id) !== -1;
+                });
+                return ret;
+            });
     }
 
     getPostDetails(id: number): Observable<Post> {
@@ -104,7 +133,7 @@ export class PostService {
     createPost(post: Post): Observable<Post> {
 
         /*----------------------------------------------------------------------------------|
-         | ~~~ Purple Path ~~~                                                              |
+         | ~~~ [Purple Path | HECHO] ~~~                                                    |
          |----------------------------------------------------------------------------------|
          | Utiliza el cliente HTTP para guardar en servidor el post indicado. La ruta sobre |
          | la cual tienes que hacer la petición POST es '/posts'. Recuerda que siempre que  |
@@ -113,6 +142,14 @@ export class PostService {
          | 'fromJson() para crar un nuevo objeto Post basado en la respuesta HTTP obtenida. |
          |----------------------------------------------------------------------------------*/
 
-        return null;
+        return this._http
+            .post(`${this._backendUri}/posts`, post)
+            .map(response => Post.fromJson(response.json()));
+    }
+
+    editPost(post: Post): Observable<Post> {
+        return this._http
+            .put(`${this._backendUri}/posts/${post.id}`, post)
+            .map(response => Post.fromJson(response.json()));
     }
 }
