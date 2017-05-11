@@ -15,7 +15,6 @@ export class UserPostsComponent implements OnInit {
 
     ngOnInit(): void {
         this._activatedRoute.data.forEach((data: { posts: Post[] }) => {
-            console.log(data);
             return this.posts = data.posts
         });
         window.scrollTo(0, 0);

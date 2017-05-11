@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Post } from '../../models/post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,7 +9,7 @@ import { PostService } from '../../services/post.service';
   templateUrl: './edit-post-form.component.html',
   styleUrls: ['./edit-post-form.component.css']
 })
-export class EditPostFormComponent implements OnInit {
+export class EditPostFormComponent implements OnInit, OnDestroy {
 
   post: Post;
   @Output() postSubmitter: EventEmitter<Post> = new EventEmitter();

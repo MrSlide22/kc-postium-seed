@@ -20,6 +20,10 @@
         -->
         <span class="date">{{ post.publicationDate | fromnow }}</span>
     </div>
+    <div class="likes">
+        <span class="likeBtn" [class.iLike]="doILike()" (click)="likePost()"><span class="fa fa-thumbs-o-up"></span> Me gusta</span>
+        <span class="counter"><span class="fa fa-thumbs-up"></span> {{ post.likes }}</span>
+    </div>
 </div>
 <div class="post">
     <h3>{{ post.title }}</h3>

@@ -13,7 +13,8 @@
 }
 
 .metadata .avatar,
-.metadata .author {
+.metadata .author,
+.metadata .likes {
     display: inline-block;
 }
 
@@ -30,6 +31,35 @@
     display: block;
     margin-top: -6px;
     color: #00ab6b;
+}
+
+.metadata .likes {
+    margin-left: 10px;
+}
+
+.metadata .likes .likeBtn {
+    color: rgba(0, 0, 0, .44);
+    font-size: 0.8em;
+    display: block;
+    cursor: pointer;
+}
+
+.metadata .likes .likeBtn.iLike {
+    color: #00ab6b;
+}
+
+.metadata .likes .likeBtn:hover {
+    color: #00ab6b;
+}
+
+.metadata .likes .likeBtn .fa {
+    font-size: 1.3em;
+}
+
+.metadata .likes .counter {
+    color: rgba(0, 0, 0, .44);
+    font-size: 0.8em;
+    display: block;
 }
 
 .metadata .author .name:hover {
@@ -59,11 +89,7 @@
 }
 
 .post .html-text {
-    font-family:
-        Georgia,
-        Cambria,
-        "Times New Roman",
-        Times,serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     font-size: 18px;
     line-height: 1.58;
     letter-spacing: -.004em;

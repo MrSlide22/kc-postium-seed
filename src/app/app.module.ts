@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 import { AutoGrowDirective } from "./directives/auto-grow.directive";
-import { BackendUriProvider} from "./services/settings.service";
+import { BackendUriProvider } from "./services/settings.service";
 import { CategoryBoxComponent } from "./components/category-box/category-box.component";
 import { CategoryPostsComponent } from "./components/category-posts/category-posts.component";
 import { CategoryService } from "./services/category.service";
@@ -31,6 +31,7 @@ import { SearchBoxComponent } from "./components/search-box/search-box.component
 import { UserPostsComponent } from "./components/user-posts/user-posts.component";
 import { FromNowPipe } from './pipes/from-now.pipe';
 import { EditPostFormComponent } from './components/edit-post-form/edit-post-form.component';
+import { LikeService } from './services/like.service';
 
 @NgModule({
     imports: [
@@ -70,6 +71,7 @@ import { EditPostFormComponent } from './components/edit-post-form/edit-post-for
         PostDetailsResolve,
         PostService,
         PostsResolve,
+        LikeService
     ],
     bootstrap: [
         AppComponent

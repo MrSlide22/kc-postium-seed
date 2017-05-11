@@ -1923,6 +1923,11 @@
       "from": "font-awesome@latest",
       "resolved": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz"
     },
+    "fontawesome": {
+      "version": "4.7.2",
+      "from": "fontawesome@latest",
+      "resolved": "https://registry.npmjs.org/fontawesome/-/fontawesome-4.7.2.tgz"
+    },
     "for-in": {
       "version": "1.0.2",
       "from": "for-in@>=1.0.1 <2.0.0",
