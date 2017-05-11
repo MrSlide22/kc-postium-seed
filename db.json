@@ -285,6 +285,23 @@
         "avatar": "assets/images/keepcoder.jpg"
       },
       "likes": 0
+    },
+    {
+      "id": 13,
+      "title": "Prueba nueva",
+      "intro": "Probando a ver si al añadir la edicion puedo seguir añadiendo",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius ultricies ante at commodo. Mauris convallis nisi vel neque imperdiet, vitae convallis orci ullamcorper. Vestibulum a ligula dapibus ipsum laoreet interdum a ut turpis. Mauris a fermentum eros. Fusce ex nisl, ullamcorper malesuada nisl quis, malesuada blandit dui. Quisque neque lectus, laoreet eget metus ac, ullamcorper ultrices risus. Nunc eros neque, malesuada sit amet elit a, dapibus ultrices elit.",
+      "media": "",
+      "publicationDate": 1494489371105,
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "assets/images/keepcoder.jpg"
+      },
+      "likes": 0
     }
   ],
   "categories": [
