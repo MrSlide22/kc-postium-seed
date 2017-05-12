@@ -55,13 +55,6 @@ const routes: Routes = [
         }
     },
     {
-        path: "posts/:postId",
-        component: PostDetailsComponent,
-        resolve: {
-            post: PostDetailsResolve
-        }
-    },
-    {
         path: "search-posts",
         component: PostsSearchComponent,
         resolve: {

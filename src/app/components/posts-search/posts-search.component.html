@@ -1,1 +1,4 @@
 <posts-list [posts]="posts"></posts-list>
+<div *ngIf="!posts.length" class="not-found">
+    <p> No se encuentran post con esa búsqueda</p>
+</div>

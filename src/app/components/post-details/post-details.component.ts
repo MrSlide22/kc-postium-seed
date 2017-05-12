@@ -28,15 +28,14 @@ export class PostDetailsComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this._activatedRoute.data.forEach(
-            // (data: { post: Post, user: User }) => {
-            //     this.post = data.post;
-            //     this.user = data.user;
-            // }
-            (data: any) => {
-                console.log(data);
-            }
-        );
+        // this._activatedRoute.data.forEach(
+        //     // (data: { post: Post }) => {
+        //     //     this.post = data.post;
+        //     // }
+        //     (data: {post: Post, user: User}) => {
+        //         console.log(data);
+        //     }
+        // );
         window.scrollTo(0, 0);
     }
 
