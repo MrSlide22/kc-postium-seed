@@ -9,6 +9,9 @@ import { UserPostsComponent } from "./components/user-posts/user-posts.component
 import { PostDetailsResolve } from "./services/post-details-resolve.service";
 import { PostsResolve } from "./services/posts-resolve.service";
 import { EditPostFormComponent } from './components/edit-post-form/edit-post-form.component';
+import { PostsSearchResolve } from './services/posts-search-resolve.service';
+import { PostsSearchComponent } from './components/posts-search/posts-search.component';
+import { UsersResolve } from './services/users-resolver.service';
 
 const routes: Routes = [
     {
@@ -47,7 +50,22 @@ const routes: Routes = [
         path: "posts/:postId",
         component: PostDetailsComponent,
         resolve: {
+            post: PostDetailsResolve,
+            user: UsersResolve
+        }
+    },
+    {
+        path: "posts/:postId",
+        component: PostDetailsComponent,
+        resolve: {
             post: PostDetailsResolve
+        }
+    },
+    {
+        path: "search-posts",
+        component: PostsSearchComponent,
+        resolve: {
+            post: PostsSearchResolve
         }
     },
     {

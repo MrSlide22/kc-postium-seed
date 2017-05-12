@@ -23,7 +23,6 @@ export class EditPostFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._activatedRoute.data.forEach((data: { posts: Post }) => {
-      console.log(data);
       return this.post = data.posts;
     });
   }

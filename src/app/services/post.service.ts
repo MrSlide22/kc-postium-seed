@@ -130,6 +130,19 @@ export class PostService {
             .map((response: Response) => Post.fromJson(response.json()));
     }
 
+    searchPosts(busqueda: string): Observable<Post[]> {
+
+        const parametros: URLSearchParams = new URLSearchParams();
+        parametros.set('q', busqueda);
+
+        let opciones: RequestOptions = new RequestOptions();
+        opciones.search = parametros;
+
+        return this._http
+            .get(`${this._backendUri}/posts`, opciones)
+            .map((response: Response) => Post.fromJsonToList(response.json()));
+    }
+
     createPost(post: Post): Observable<Post> {
 
         /*----------------------------------------------------------------------------------|

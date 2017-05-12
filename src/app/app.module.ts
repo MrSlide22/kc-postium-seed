@@ -32,6 +32,10 @@ import { UserPostsComponent } from "./components/user-posts/user-posts.component
 import { FromNowPipe } from './pipes/from-now.pipe';
 import { EditPostFormComponent } from './components/edit-post-form/edit-post-form.component';
 import { LikeService } from './services/like.service';
+import { PostsSearchResolve } from './services/posts-search-resolve.service';
+import { PostsSearchComponent } from './components/posts-search/posts-search.component';
+import { UserService } from './services/user.service';
+import { UsersResolve } from './services/users-resolver.service';
 
 @NgModule({
     imports: [
@@ -64,6 +68,7 @@ import { LikeService } from './services/like.service';
         UserPostsComponent,
         FromNowPipe,
         EditPostFormComponent,
+        PostsSearchComponent,
     ],
     providers: [
         BackendUriProvider,
@@ -71,7 +76,10 @@ import { LikeService } from './services/like.service';
         PostDetailsResolve,
         PostService,
         PostsResolve,
-        LikeService
+        LikeService,
+        PostsSearchResolve,
+        UserService,
+        UsersResolve
     ],
     bootstrap: [
         AppComponent

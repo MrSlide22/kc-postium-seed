@@ -7,30 +7,37 @@ import { User } from '../../models/user';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/Subscription';
 import { LikeService } from '../../services/like.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     templateUrl: "post-details.component.html",
     styleUrls: ["post-details.component.css"]
 })
-export class PostDetailsComponent implements OnInit, OnDestroy {
+export class PostDetailsComponent implements OnInit {
 
     post: Post;
-    private _postSubscription: Subscription;
+    user: User;
 
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
         private _postService: PostService,
-        private _likeService: LikeService
+        private _likeService: LikeService,
+        private _userService: UserService
     ) { }
 
     ngOnInit(): void {
-        this._activatedRoute.data.forEach((data: { post: Post }) => this.post = data.post);
-        window.scrollTo(0, 0);
-    }
 
-    ngOnDestroy(): void {
-        this._unsubscribePostLike();
+        this._activatedRoute.data.forEach(
+            // (data: { post: Post, user: User }) => {
+            //     this.post = data.post;
+            //     this.user = data.user;
+            // }
+            (data: any) => {
+                console.log(data);
+            }
+        );
+        window.scrollTo(0, 0);
     }
 
     plainTextToHtml(text: string): string {
@@ -65,25 +72,10 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
     likePost() {
 
-        this._postSubscription = this._postService.getPostDetails(this.post.id).map((post: Post) => {
-
-            this.post = post;
-
-            this.post.likes += this._likeService.like(this.post.id);
-
-            this._unsubscribePostLike();
-            this._postSubscription = this._postService.editPost(this.post).subscribe();
-
-        }).subscribe();
+        this._likeService.like(this.post.id).subscribe(likes => this.post.likes = likes);
     }
 
     doILike() {
         return this._likeService.doILike(this.post.id);
-    }
-
-    private _unsubscribePostLike(): void {
-        if (this._postSubscription) {
-            this._postSubscription.unsubscribe();
-        }
     }
 }
